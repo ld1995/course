@@ -34,8 +34,8 @@ dependencies {
 	runtime('mysql:mysql-connector-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	compileOnly('org.projectlombok:lombok')
-	compile('com.auth0:auth0:1.5.1')
-	compile('com.auth0:auth0-spring-security-api:1.0.0')
-	compile('org.hibernate:hibernate-search-engine:5.9.1.Final')
-	compile('org.hibernate:hibernate-search-orm:5.9.1.Final')
+//	compile('com.auth0:auth0:1.5.1')
+//	compile('com.auth0:auth0-spring-security-api:1.0.0')
+//	compile('org.hibernate:hibernate-search-engine:5.9.1.Final')
+//	compile('org.hibernate:hibernate-search-orm:5.9.1.Final')
 }
