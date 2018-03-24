@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Indexed
 @Entity
@@ -14,6 +15,7 @@ import java.util.Date;
 @Data
 public class Comment extends PersistentObject {
 
+    @ManyToOne
     private Precis precis;
 
     @Column(name = "date", columnDefinition="DATETIME")
@@ -28,7 +30,11 @@ public class Comment extends PersistentObject {
     @OneToMany(mappedBy = "demo_like", cascade = CascadeType.ALL, orphanRemoval = true)
     private LikeComment like;
 
+    @OneToMany(mappedBy = "parent")
+    private List<Comment> comments;
 
+    @ManyToOne
+    private Comment parent;
 
 
 }

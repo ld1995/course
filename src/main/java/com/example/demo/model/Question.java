@@ -11,6 +11,7 @@ import java.util.Date;
 @Data
 public class Question extends PersistentObject {
 
+
     private User user;
 
     private Precis precis;
