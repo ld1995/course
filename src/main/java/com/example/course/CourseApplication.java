@@ -1,11 +1,7 @@
 package com.example.course;
 
-import com.example.course.model.User;
-import com.example.course.repository.UserRepository;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class CourseApplication {
@@ -14,9 +10,21 @@ public class CourseApplication {
 		SpringApplication.run(CourseApplication.class, args);
 	}
 
-//    @Bean
-//    public void demo(UserRepository repository) {
-//        repository.save(new User());
-//    }
+//	@Bean
+//	public void CreateUser(@Autowired UserRepository userRepository) {
+//		HashSet<Workbook> workbooks = new HashSet<>();
+//		workbooks.add(new Workbook(
+//				"new Workbook",
+//				"Title is wirkbook",
+//				"123",
+//				"123djsjdgcsdcsdclmksdvcbnmsdmcnbsd"));
+//		userRepository.save(new User("ld1995", Role.ROLE_USER, workbooks));
+//	}
+
 }
 
+//new Workbook(
+//				"new Workbook",
+//				"Title is wirkbook",
+//				"123",
+//				"123djsjdgcsdcsdclmksdvcbnmsdmcnbsd")

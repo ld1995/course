@@ -1,0 +1,5 @@
+<input class="form-control mr-sm-2"
+       type="text" id="search"
+       placeholder="Поиск"
+       (keyup.enter)="search($event.target.value);
+        $event.target.value ='';" maxlength="120" [(ngModel)]="query" />

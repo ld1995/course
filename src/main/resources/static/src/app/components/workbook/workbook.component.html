@@ -1,0 +1,38 @@
+
+
+<div class="card">
+  <div class="card-header" role="tab">
+    <div class="mb-6">
+      <div class="row">
+        <div class="col-sm">
+          <h6>@{{workbook.username}}</h6>
+        </div>
+        <div class="col-sm">
+          <h6>Name : {{workbook.name}}</h6>
+        </div>
+        <div class="col-sm">
+          <h6>№ : {{workbook.numberSpecialty}}</h6>
+        </div>
+      </div>
+      <accordion-group heading="{{workbook.title}}">
+        <!--<span accordion-heading></span>#group>-->
+          <div class="card-block">
+            <h3>{{workbook.content}}</h3>
+          </div>
+      </accordion-group>
+      <div class="row">
+        <div class="col-sm">
+          <h6>Tags : {{workbook.tags}}</h6>
+        </div>
+        <div class="col-sm">
+          <h6>Rating : {{workbook.rating}}</h6>
+        </div>
+        <div class="col-sm">
+          <h6>Data : {{workbook.date}}</h6>
+        </div>
+    </div>
+
+    </div>
+    <!--<app-comment-list *ngIf="auth.isAuthenticated()"></app-comment-list>-->
+  </div>
+</div>

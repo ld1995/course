@@ -1,0 +1,41 @@
+<!--&lt;!&ndash;The content below is only a placeholder and can be replaced.&ndash;&gt;-->
+  <!--&lt;!&ndash;<div *ngIf="auth.isAuthenticated()" >&ndash;&gt;-->
+    <!--&lt;!&ndash;<app-home></app-home>&ndash;&gt;-->
+  <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+<header>
+  <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <a class="navbar-brand" href="#">Курсовой</a>
+    <div class="navbar-collapse collapse show" id="navbarCollapse" style="">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+      </ul>
+      <app-profile *ngIf="auth.isAuthenticated()"></app-profile>
+      <form class="form-inline mt-2 mt-md-0">
+        <app-search></app-search>
+      </form>
+      <span class="nav-item-type">
+        <button class="btn btn-outline-primary" *ngIf="!auth.isAuthenticated()"
+                (click)="auth.login()">
+          Log In
+        </button>
+        <button class="btn btn-outline-primary" *ngIf="auth.isAuthenticated()"
+                (click)="auth.logout()">
+          Log Out
+        </button>
+      </span>
+    </div>
+  </nav>
+</header>
+
+<main class="container">
+  <!--<app-home></app-home>-->
+  <app-workbook-list></app-workbook-list>
+</main>
+
+
