@@ -36,14 +36,12 @@ import javax.persistence.*;
                 })
         })
 public class Workbook extends HasAuthor {
-
     public Workbook(String name, String title, String numberSpecialty, String content) {
         this.name = name;
         this.title = title;
         this.numberSpecialty = numberSpecialty;
         this.content = content;
     }
-
 
     @Column(name = "name")
     @Analyzer(definition = "customarily")
@@ -78,7 +76,7 @@ public class Workbook extends HasAuthor {
     @OneToMany(mappedBy = "workbook", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Comment> comments = new HashSet<>();
 
-    @ManyToMany()
     @IndexedEmbedded
+    @ManyToMany()
     private Set<Tag> tags = new HashSet<>();
 }

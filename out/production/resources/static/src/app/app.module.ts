@@ -21,6 +21,11 @@ import { CommentListComponent } from './components/comment-list/comment-list.com
 import { CommentComponent } from './components/comment/comment.component';
 import {UserService} from "./services/user/user.service";
 import {WorkbookService} from "./services/workbook/workbook.service";
+import { AccordionModule } from 'ngx-bootstrap';
+import { UserComponent } from './components/user/user.component';
+import { RootComponent } from './components/root/root.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import {SearchDataService} from "./services/search/search-data.service";
 
 @NgModule({
   declarations: [
@@ -32,26 +37,31 @@ import {WorkbookService} from "./services/workbook/workbook.service";
     SearchComponent,
     ResultComponent,
     CommentListComponent,
-    CommentComponent
+    CommentComponent,
+    UserComponent,
+    RootComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    AccordionModule.forRoot(),
     routing
   ],
   providers: [appRoutingProviders,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
     AUTH_PROVIDERS,
     AuthService,
     HomeService,
     SearchService,
     UserService,
     WorkbookService,
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptor,
-    multi: true
-  }],
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

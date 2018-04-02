@@ -9,10 +9,13 @@
     <div class="navbar-collapse collapse show" id="navbarCollapse" style="">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="">Главная страница<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="/settings">Настройки</a>
+        </li>
+        <li class="nav-item" *ngIf="auth.isAuthenticated()">
+          <a class="nav-link" href="/user">Пользователь</a>
         </li>
       </ul>
       <app-profile *ngIf="auth.isAuthenticated()"></app-profile>
@@ -34,8 +37,7 @@
 </header>
 
 <main class="container">
-  <!--<app-home></app-home>-->
-  <app-workbook-list></app-workbook-list>
+  <router-outlet></router-outlet>
 </main>
 
 

@@ -8,7 +8,7 @@ import {SearchService} from "./services/search/search.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(public auth: AuthService, public search: SearchService) {
+  constructor(public auth: AuthService) {
     auth.handleAuthentication();
 
   }

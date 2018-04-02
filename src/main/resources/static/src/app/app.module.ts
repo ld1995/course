@@ -23,7 +23,8 @@ import {UserService} from "./services/user/user.service";
 import {WorkbookService} from "./services/workbook/workbook.service";
 import { AccordionModule } from 'ngx-bootstrap';
 import { UserComponent } from './components/user/user.component';
-
+import { RootComponent } from './components/root/root.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,9 @@ import { UserComponent } from './components/user/user.component';
     ResultComponent,
     CommentListComponent,
     CommentComponent,
-    UserComponent
+    UserComponent,
+    RootComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -46,17 +49,19 @@ import { UserComponent } from './components/user/user.component';
     routing
   ],
   providers: [appRoutingProviders,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
     AUTH_PROVIDERS,
     AuthService,
     HomeService,
     SearchService,
     UserService,
     WorkbookService,
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptor,
-    multi: true
-  }],
+    ResultComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

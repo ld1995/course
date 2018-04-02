@@ -1,161 +1,38 @@
 
-<div class="container">
-  <div class="well">
-    <div class="media">
-      <a class="pull-left" href="#">
-        <img class="media-object" src="http://placekitten.com/150/150">
-      </a>
-      <div class="media-body">
-        <h4 class="media-heading">{{workbook.name}}</h4>
-        <p class="text-right">By {{workbook.username}}</p>
-        <p> {{workbook.title}}</p>
-        <ul class="list-inline list-unstyled">
-          <li><span><i class="glyphicon glyphicon-calendar"></i>{{workbook.date.getDate()}}</span></li>
-          <li>|</li>
-          <span><i class="glyphicon glyphicon-comment"></i>{{workbook.comments.length}} комментариев</span>
-          <app-comment-list *ngIf="auth.isAuthenticated()"></app-comment-list>
-          <li>|</li>
-          <li>
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star-empty"></span>
-          </li>
-        </ul>
+
+<div class="card">
+  <div class="card-header" role="tab">
+    <div class="mb-6">
+      <div class="row">
+        <div class="col-sm">
+          <h6>@{{workbook.username}}</h6>
+        </div>
+        <div class="col-sm">
+          <h6>Name : {{workbook.name}}</h6>
+        </div>
+        <div class="col-sm">
+          <h6>№ : {{workbook.numberSpecialty}}</h6>
+        </div>
       </div>
+      <accordion-group heading="{{workbook.title}}">
+        <!--<span accordion-heading></span>#group>-->
+          <div class="card-block">
+            <h3>{{workbook.content}}</h3>
+          </div>
+      </accordion-group>
+      <div class="row">
+        <div class="col-sm">
+          <h6>Tags : {{workbook.tags}}</h6>
+        </div>
+        <div class="col-sm">
+          <h6>Rating : {{workbook.rating}}</h6>
+        </div>
+        <div class="col-sm">
+          <h6>Data : {{workbook.date}}</h6>
+        </div>
     </div>
+
+    </div>
+    <!--<app-comment-list *ngIf="auth.isAuthenticated()"></app-comment-list>-->
   </div>
 </div>
-
-  <!--<div class="col-sm card">-->
-    <!--<h2>{{workbook.name}}</h2>-->
-    <!--<p>{{workbook.content}}</p>-->
-    <!--<p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>-->
-  <!--</div>-->
-
-<!--<div class="col-md-8 offset-md-2">-->
-  <!--<div class="bd-example" data-example-id="">-->
-    <!--<div id="accordion" role="tablist" aria-multiselectable="true">-->
-      <!--<div class="card">-->
-        <!--<div class="card-header" role="tab" id="headingOne">-->
-          <!--<div class="mb-0">-->
-            <!--<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed">-->
-              <!--<i class="fa fa-file-text-o" aria-hidden="true"></i>-->
-              <!--<h3>Collapsible Group Item</h3>-->
-              <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>-->
-            <!--</a>-->
-            <!--<i class="fa fa-angle-right" aria-hidden="true"></i>-->
-          <!--</div>-->
-        <!--</div>-->
-
-        <!--<div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="">-->
-          <!--<div class="card-block">-->
-            <!--Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="card">-->
-        <!--<div class="card-header" role="tab" id="headingTwo">-->
-          <!--<div class="mb-0">-->
-            <!--<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseOne" class="collapsed">-->
-              <!--<i class="fa fa-file-text-o" aria-hidden="true"></i>-->
-              <!--<h3>Collapsible Group Item</h3>-->
-              <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>-->
-            <!--</a>-->
-            <!--<i class="fa fa-angle-right" aria-hidden="true"></i>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" aria-expanded="false">-->
-          <!--<div class="card-block">-->
-            <!--Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="card">-->
-        <!--<div class="card-header" role="tab" id="headingThree">-->
-          <!--<div class="mb-0">-->
-            <!--<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseOne" class="collapsed">-->
-              <!--<i class="fa fa-file-text-o" aria-hidden="true"></i>-->
-              <!--<h3>Collapsible Group Item</h3>-->
-              <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>-->
-            <!--</a>-->
-            <!--<i class="fa fa-angle-right" aria-hidden="true"></i>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" aria-expanded="false">-->
-          <!--<div class="card-block">-->
-            <!--Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="card">-->
-        <!--<div class="card-header" role="tab" id="headingOne">-->
-          <!--<div class="mb-0">-->
-            <!--<a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseOne" class="collapsed">-->
-              <!--<i class="fa fa-file-text-o" aria-hidden="true"></i>-->
-              <!--<h3>Collapsible Group Item</h3>-->
-              <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>-->
-            <!--</a>-->
-            <!--<i class="fa fa-angle-right" aria-hidden="true"></i>-->
-          <!--</div>-->
-        <!--</div>-->
-
-        <!--<div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="">-->
-          <!--<div class="card-block">-->
-            <!--Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="card">-->
-        <!--<div class="card-header" role="tab" id="headingTwo">-->
-          <!--<div class="mb-0">-->
-            <!--<a data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseOne" class="collapsed">-->
-              <!--<i class="fa fa-file-text-o" aria-hidden="true"></i>-->
-              <!--<h3>Collapsible Group Item</h3>-->
-              <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>-->
-            <!--</a>-->
-            <!--<i class="fa fa-angle-right" aria-hidden="true"></i>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div id="collapseFive" class="collapse" role="tabpanel" aria-labelledby="headingTwo" aria-expanded="false">-->
-          <!--<div class="card-block">-->
-            <!--Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="card">-->
-        <!--<div class="card-header" role="tab" id="headingThree">-->
-          <!--<div class="mb-0">-->
-            <!--<a data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseOne" class="collapsed">-->
-              <!--<i class="fa fa-file-text-o" aria-hidden="true"></i>-->
-              <!--<h3>Collapsible Group Item</h3>-->
-              <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>-->
-            <!--</a>-->
-            <!--<i class="fa fa-angle-right" aria-hidden="true"></i>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div id="collapseSix" class="collapse" role="tabpanel" aria-labelledby="headingThree" aria-expanded="false">-->
-          <!--<div class="card-block">-->
-            <!--Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
-
-  <!--<div class="col-md-6">-->
-    <!--<div class="card flex-md-row mb-4 box-shadow h-md-250">-->
-      <!--<div class="card-body d-flex flex-column align-items-start">-->
-        <!--<strong class="d-inline-block mb-2 text-primary">World</strong>-->
-        <!--<h3 class="mb-0">-->
-          <!--<a class="text-dark" href="#">Featured post</a>-->
-        <!--</h3>-->
-        <!--<div class="mb-1 text-muted">Nov 12</div>-->
-        <!--<p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>-->
-        <!--<a href="#">Continue reading</a>-->
-      <!--</div>-->
-      <!--<img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb" alt="Card image cap">-->
-    <!--</div>-->
-  <!--</div>-->

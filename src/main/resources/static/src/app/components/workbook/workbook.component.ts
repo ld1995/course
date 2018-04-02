@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AuthService} from "../../services/auth-service";
 import {Workbook} from "../../models/workbook.model";
+import {AccordionConfig} from "ngx-bootstrap";
 
 @Component({
   selector: 'app-workbook',

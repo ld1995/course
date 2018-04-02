@@ -1,4 +1,8 @@
-<h2 class="text-center"><span>Bootstrap 4 Accordian</span>
 <div class="row" *ngFor="let workbook of workbookList">
-  <app-workbook [workbook]="workbook"></app-workbook>
+    <div class="col-md-8 offset-md-2 p-3">
+      <accordion [closeOthers]="true">
+        <app-workbook [workbook]="workbook"></app-workbook>
+      </accordion>
+    </div>
 </div>
+

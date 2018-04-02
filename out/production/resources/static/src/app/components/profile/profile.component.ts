@@ -13,11 +13,7 @@ import {HttpClient} from "@angular/common/http";
 export class ProfileComponent implements OnInit {
   private _nickname: string;
   private _picture: Url;
-  //
-  // constructor(private auth: AuthService) {
-  //   this.nickname = this.auth.getProfile().nickname;
-  //   this.picture = this.auth.getProfile().picture;
-  // }
+
   constructor(public auth: AuthService) { }
 
   ngOnInit() {
@@ -31,7 +27,6 @@ export class ProfileComponent implements OnInit {
       });
     }
   }
-
 
   get nickname(): string {
     return this._nickname;

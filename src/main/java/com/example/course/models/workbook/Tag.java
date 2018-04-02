@@ -14,8 +14,8 @@ import java.util.Set;
 @Data
 public class Tag extends PersistentObject {
 
-    @Column(name = "name")
     @Field
+    @Column(name = "name")
     private String name;
 
     @ManyToMany(cascade = { CascadeType.ALL })
