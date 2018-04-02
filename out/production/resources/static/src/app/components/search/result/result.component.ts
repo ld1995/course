@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import {Workbook} from "../../../models/workbook.model";
-import {SearchDataService} from "../../../services/search/search-data.service";
 import {SearchService} from "../../../services/search/search.service";
 
 @Component({
@@ -8,23 +7,15 @@ import {SearchService} from "../../../services/search/search.service";
   templateUrl: './result.component.html',
   styleUrls: ['./result.component.css'],
 })
+@Injectable()
 export class ResultComponent implements OnInit {
+  public workbookList: Workbook[] = [];
 
-  title: string;
-
-  public workbookList: Workbook[];
-
-  constructor(private searchService: SearchService) {
+  constructor( private searchService: SearchService) {
   }
 
   ngOnInit() {
-    window.location.reload();
     this.workbookList = this.searchService.data;
-    if(this.workbookList.length === 0) {
-      this.title = 'Тебе не повезло, попробуй ещё разочек :-)'
-    } else {
-      this.title = 'Успех!!!'
-    }
   }
 
 }

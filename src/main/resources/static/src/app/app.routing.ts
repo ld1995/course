@@ -19,6 +19,9 @@ const appRoutes: Routes = [
   }, {
     path: 'settings',
     component: SettingsComponent,
+  }, {
+    path: 'user',
+    component: UserComponent
   }
 ];
 

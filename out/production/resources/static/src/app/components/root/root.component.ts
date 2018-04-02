@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {WorkbookService} from "../../services/workbook/workbook.service";
 import {Workbook} from "../../models/workbook.model";
 

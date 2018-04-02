@@ -4,6 +4,7 @@ import com.example.course.models.HasAuthor;
 import com.example.course.models.workbook.Workbook;
 import lombok.*;
 import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Indexed
 public class Comment extends HasAuthor {
 
     @ManyToOne

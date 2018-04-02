@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,20 +20,12 @@ import java.util.List;
 public class SearchController {
 
     @Autowired
-    private SearchWorkbook searchWorkbook;
-
-    @Autowired
     private SearchService searchService;
 
     @PostMapping
     @ResponseBody
-    public List<WorkbookDTO> resultSearch(@RequestBody String query){
-        if(searchService.isValid(query.trim())) {
-            List<Workbook> workbooks = (List<Workbook>) searchWorkbook.searchWorkbook(query);
-            return searchService.conversionToDTO(workbooks);
-        } else {
-            return new ArrayList<>();
-        }
+    public List<WorkbookDTO> resultSearch(@RequestBody String query) throws IOException {
+        return searchService.search(query);
     }
     //https://stackoverflow.com/questions/13765698/getting-error-on-a-specific-query
 }

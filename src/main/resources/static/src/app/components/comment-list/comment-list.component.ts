@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CommentListComponent implements OnInit {
 
-  commentList = ['comment1', 'comment2']
+  commentList = ['comment1', 'comment2'];
 
   constructor() { }
 

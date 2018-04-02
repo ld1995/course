@@ -25,7 +25,6 @@ import { AccordionModule } from 'ngx-bootstrap';
 import { UserComponent } from './components/user/user.component';
 import { RootComponent } from './components/root/root.component';
 import { SettingsComponent } from './components/settings/settings.component';
-import {SearchDataService} from "./services/search/search-data.service";
 
 @NgModule({
   declarations: [
@@ -61,6 +60,7 @@ import {SearchDataService} from "./services/search/search-data.service";
     SearchService,
     UserService,
     WorkbookService,
+    ResultComponent
   ],
   bootstrap: [AppComponent]
 })

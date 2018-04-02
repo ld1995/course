@@ -4,6 +4,7 @@ import com.example.course.models.PersistentObject;
 import com.example.course.models.workbook.Workbook;
 import lombok.Data;
 import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -12,6 +13,7 @@ import java.util.Set;
 @Entity
 @Table(name = "course_tag")
 @Data
+@Indexed
 public class Tag extends PersistentObject {
 
     @Field

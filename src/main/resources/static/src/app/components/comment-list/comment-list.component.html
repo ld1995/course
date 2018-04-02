@@ -1,3 +1,5 @@
-<div *ngFor="let comment of commentList">
-  <app-comment [comment]="comment"></app-comment>
-</div>
+<accordion [closeOthers]="true">
+  <div *ngFor="let comment of commentList">
+    <app-comment [comment]="comment"></app-comment>
+  </div>
+</accordion>

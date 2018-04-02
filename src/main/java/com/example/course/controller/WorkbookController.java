@@ -2,20 +2,17 @@ package com.example.course.controller;
 
 import com.example.course.dto.WorkbookDTO;
 import com.example.course.models.workbook.Workbook;
-import com.example.course.repository.WorkbookRepository;
 import com.example.course.service.WorkbookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController()
 public class WorkbookController {
-
-    @Autowired
-    private WorkbookRepository workbookRepository;
 
     @Autowired
     private WorkbookService workbookService;

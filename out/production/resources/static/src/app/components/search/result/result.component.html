@@ -1,4 +1,4 @@
-<div><h4 class="text-muted p-3">{{title}}</h4>
+<div><h4 class="text-muted p-3">{{workbookList.length === 0 ? 'Тебе не повезло, попробуй ещё разочек :-)' : 'Ура!!!'}}</h4>
   <app-search></app-search>
 </div>
 <app-workbook-list [workbookList]="workbookList"></app-workbook-list>
