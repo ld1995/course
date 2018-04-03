@@ -1,35 +1,29 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {Workbook} from "../../models/workbook.model";
-import * as Rx from "rxjs/Rx";
-import {Observable} from "rxjs/Observable";
-import {Tag} from "../../models/tag.model";
+import {Workbook} from '../../models/workbook.model';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class WorkbookService {
 
-  constructor(private http:HttpClient) {
+  constructor(private http: HttpClient) {
 
   }
-  private url = 'workbook';
 
   public getWorkbookList(): Observable<Workbook[]> {
-    return this.http.get<Workbook[]>(`${environment.webServiceEndpoint}/public/${this.url}`)
+    return this.http.get<Workbook[]>(`${environment.webServiceEndpoint}/public/workbook`);
   }
 
-
-  //
-  // getPerson(id: number): Rx.Observable<Person> {
-  //   return this.http.get(`${webServiceEndpoint}/person/${id}`).map(this.extractData).publish().refCount();
-  // }
-  //
-  // resolve(route: ActivatedRouteSnapshot,state: RouterStateSnapshot): Rx.Observable<Person> {
-  //   return this.getPerson(Number(route.params['id']));
-  // }
-  //
-  deleteWorkbook(id: number): Rx.Observable<Workbook> {
-    return this.http.delete<Workbook>(`${environment.webServiceEndpoint}/private/${id}`);
+  public getWorkbookById(id: number): Observable<Workbook> {
+    return this.http.get<Workbook>(`${environment.webServiceEndpoint}/private/workbook/${id}`);
   }
 
+  public deleteWorkbook(id: number): Observable<Workbook> {
+    return this.http.delete<Workbook>(`${environment.webServiceEndpoint}/private/workbook/${id}`);
+  }
+
+  public createWorkbook(workbook: Workbook): Observable<Workbook> {
+    return this.http.post<Workbook>(`${environment.webServiceEndpoint}/private/workbook`, workbook);
+  }
 }

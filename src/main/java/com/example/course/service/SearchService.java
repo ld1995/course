@@ -1,12 +1,9 @@
 package com.example.course.service;
 
-import com.example.course.converter.workbook.WorkbookToDTOConverter;
-import com.example.course.dto.WorkbookDTO;
+import com.example.course.converter.workbook.WorkbookToDtoConverter;
+import com.example.course.dto.WorkbookDto;
 import com.example.course.models.workbook.Workbook;
 import com.example.course.repository.search.SearchWorkbook;
-import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
-import org.apache.lucene.analysis.util.CharArraySet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +16,7 @@ import java.util.stream.Collectors;
 public class SearchService {
 
     @Autowired
-    private WorkbookToDTOConverter toDTOConverter;
+    private WorkbookToDtoConverter toDTOConverter;
 
     @Autowired
     private SearchWorkbook searchWorkbook;
@@ -28,13 +25,12 @@ public class SearchService {
         return query.matches("^[a-zA-Z0-9А-Яа-я]+");
     }
 
-    public List<WorkbookDTO> conversionToDTO(List<Workbook> workbooks) {
+    public List<WorkbookDto> conversionToDTO(List<Workbook> workbooks) {
         return workbooks.stream().map(workbook -> toDTOConverter.convert(workbook))
                 .collect(Collectors.toList());
     }
 
-    public List<WorkbookDTO> search(String query) throws IOException {
-//        Analyzer analyzer = new StandardAnalyzer(CharArraySet.EMPTY_SET);
+    public List<WorkbookDto> search(String query) throws IOException {
         if(isValid(query.trim())) {
            return conversionToDTO( (List<Workbook>) searchWorkbook.searchWorkbook(query));
         } else {

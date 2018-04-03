@@ -3,9 +3,9 @@ package com.example.course.dto;
 import lombok.Data;
 
 @Data
-public class CommentDTO extends BasePersistenceDTO{
+public class CommentDto extends BasePersistenceDto {
 
-//    private Workbook workbook;
+//    private String workbook;
 //
 //    @Column(name = "date", columnDefinition="DATETIME")
 //    @DateTimeFormat(pattern = "yyyy-MM-dd")

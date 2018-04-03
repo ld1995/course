@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Url} from "url";
-import {AuthService} from "../../services/auth-service";
-import {environment} from "../../../environments/environment";
-import {HttpClient} from "@angular/common/http";
+import {Url} from 'url';
+import {AuthService} from '../../services/auth0/auth-service';
 
 @Component({
   selector: 'app-profile',

@@ -1,14 +1,11 @@
 package com.example.course.controller;
 
-import com.example.course.dto.WorkbookDTO;
-import com.example.course.models.workbook.Workbook;
+import com.example.course.dto.WorkbookDto;
 import com.example.course.service.WorkbookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController()
@@ -17,13 +14,29 @@ public class WorkbookController {
     @Autowired
     private WorkbookService workbookService;
 
-    @RequestMapping(value = "/api/public/workbook", method = RequestMethod.GET, produces = "application/json")
-    public List<WorkbookDTO> getAllWorkbook() {
-        return workbookService.getAllWorkbookDTO();
+    @GetMapping("/api/public/workbook")
+    public List<WorkbookDto> getWorkbookList() {
+        return workbookService.getWorkbookList();
     }
 
-    @RequestMapping(value = "/api/private/workbook", method = RequestMethod.POST, produces = "application/json")
-    public void addWorkbook(@RequestBody Workbook workbook) {
-        workbookService.addWorkbook(workbook);
+    @PostMapping("/api/private/workbook")
+    public void addWorkbook(@RequestBody @Valid WorkbookDto workbookDTO) {
+        workbookService.createWorkbook(workbookDTO);
+    }
+
+    @DeleteMapping("/api/private/workbook/{id}")
+    public void deleteWorkbook(@PathVariable Long id) {
+        workbookService.deleteWorkbook(id);
+    }
+
+    @GetMapping("/api/private/workbook/{id}")
+    public WorkbookDto getWorkbook(@PathVariable Long id) {
+        return workbookService.getWorkbook(id);
+    }
+
+    @PutMapping("/api/private/workbook")
+    public void deleteWorkbook(@RequestBody @Valid WorkbookDto workbookDTO) {
+        workbookService.updateWorkbook(workbookDTO);
     }
 }
+//@ResponseBody ResponseEntity<String>

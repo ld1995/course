@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AuthService} from "./services/auth-service";
+import {AuthService} from "./services/auth0/auth-service";
 import {SearchService} from "./services/search/search.service";
 import {Router} from '@angular/router';
 
@@ -11,6 +11,7 @@ import {Router} from '@angular/router';
 export class AppComponent {
   constructor(public auth: AuthService, public route: Router) {
     auth.handleAuthentication();
+    // auth.scheduleRenewal();
   }
   public redirectToRoot() {
     this.navigate('');

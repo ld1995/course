@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import 'rxjs/add/operator/filter';
 import * as auth0 from 'auth0-js';
 import { environment } from '../../environments/environment';
-import {HttpClient} from "@angular/common/http";
-import {UserService} from "./user/user.service";
-import {User} from "../models/user.model";
+import {HttpClient} from '@angular/common/http';
+import {UserService} from './user/user.service';
+import {User} from '../models/user.model';
 
 @Injectable()
 export class AuthService {

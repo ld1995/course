@@ -2,16 +2,19 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/filter';
 import * as auth0 from 'auth0-js';
-import { environment } from '../../environments/environment';
-import {HttpClient} from "@angular/common/http";
-import {UserService} from "./user/user.service";
-import {User} from "../models/user.model";
+import { environment } from '../../../environments/environment';
+import {HttpClient} from '@angular/common/http';
+import {UserService} from '../user/user.service';
+import {Observable} from 'rxjs/Observable';
+import {mergeMap} from 'rxjs/operators';
+import 'rxjs/add/observable/of';
 
 @Injectable()
 export class AuthService {
   private auth0 = new auth0.WebAuth(environment.configAuth0);
 
-  userProfile: any;
+  public userProfile: any;
+  refreshSub: any;
 
   constructor(public router: Router, private http: HttpClient, private user: UserService) {
   }
@@ -41,6 +44,7 @@ export class AuthService {
     const scopes = authResult.scope || environment.requestedScopes || '';
     localStorage.setItem('scopes', JSON.stringify(scopes));
     this.user.createUser();
+    this.scheduleRenewal();
     // this.user.getAllUsers();
   }
 
@@ -65,7 +69,8 @@ export class AuthService {
     localStorage.removeItem('expires_at');
     localStorage.removeItem('profile');
     localStorage.removeItem('scopes');
-    this.router.navigate(['/']);
+    this.unscheduleRenewal();
+    this.router.navigate(['']);
   }
 
   public isAuthenticated(): boolean {
@@ -77,6 +82,39 @@ export class AuthService {
     const grantedScopes = JSON.parse(localStorage.getItem('scopes')).split(' ');
     return scopes.every(scope => grantedScopes.includes(scope));
   }
-}
 
-//use   *ngIf="auth.isAuthenticated() && auth.userHasScopes(['write:messages'])"
+  public renewToken() {
+    this.auth0.checkSession({}, (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        this.setSession(result);
+      }
+    });
+  }
+
+  public scheduleRenewal() {
+    if (!this.isAuthenticated()) { return; }
+    this.unscheduleRenewal();
+    const expiresAt = JSON.parse(window.localStorage.getItem('expires_at'));
+
+    const expiresIn$ = Observable.of(expiresAt).pipe(
+      mergeMap(  a => { const now = Date.now();
+          return Observable.timer(Math.max(1, a - now));
+        }
+      )
+    );
+    this.refreshSub = expiresIn$.subscribe(
+      () => {
+        this.renewToken();
+        this.scheduleRenewal();
+      }
+    );
+  }
+
+  public unscheduleRenewal() {
+    if (this.refreshSub) {
+      this.refreshSub.unsubscribe();
+    }
+  }
+}

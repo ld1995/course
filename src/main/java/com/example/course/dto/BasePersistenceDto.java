@@ -6,8 +6,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public abstract class BasePersistenceDTO {
+public abstract class BasePersistenceDto {
 
-    @JsonIgnore
+//    @JsonIgnore
     private Long id;
 }

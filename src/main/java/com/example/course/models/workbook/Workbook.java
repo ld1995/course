@@ -7,12 +7,16 @@ import java.util.Set;
 import com.example.course.models.*;
 import com.example.course.models.comment.Comment;
 import com.example.course.models.question.Question;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
 import org.apache.lucene.analysis.snowball.SnowballPorterFilterFactory;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.analysis.standard.StandardTokenizerFactory;
+import org.apache.lucene.analysis.util.CharArraySet;
 import org.hibernate.search.annotations.*;
 import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Parameter;
@@ -26,6 +30,7 @@ import javax.persistence.*;
 @Indexed
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(exclude="rating", callSuper = false)
 @AnalyzerDef(name = "customarily",
         tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
         filters = {
@@ -66,8 +71,9 @@ public class Workbook extends HasAuthor {
     @Temporal(TemporalType.DATE)
     private Date date = new Date();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "workbook", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<RatingWorkbook> rating = new HashSet<>();
+    private Set<Rating> rating = new HashSet<>();
 
     @OneToMany(mappedBy = "workbook", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Question> questions = new HashSet<>();

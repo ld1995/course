@@ -2,7 +2,7 @@ export class Profile {
   private _nickname: string;
   private _picture: URL;
 
-  constructor(nickname: string,picture: URL) {
+  constructor(nickname: string, picture: URL) {
     this._nickname = nickname;
     this._picture = picture;
   }

@@ -1,3 +1,43 @@
-<p>
-  user works!
-</p>
+<!--<div class="row">-->
+  <!--<div class="col-sm">-->
+<!--<textarea class="variable-textarea" rows="5" [(ngModel)]="markdown"></textarea>-->
+  <!--</div>-->
+  <!--<div class="col-sm">-->
+<!--<markdown class="variable-binding card" [data]="markdown"></markdown>-->
+  <!--</div>-->
+<!--</div>-->
+
+  <div class="p-3 row">
+    <div class="col-md-4">
+    <div class="card card-outline-secondary">
+      <div class="card-header">
+        <h3 class="mb-0">Добавление нового конспекта</h3>
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <label for="name">Название</label>
+          <input type="text" class="form-control" name="name" id="name" required>
+        </div>
+        <div class="row">
+          <div class="col-sm">
+            <textarea class="variable-textarea"[(ngModel)]="content"></textarea>
+          </div>
+          <div class="col-sm">
+            <markdown class="variable-binding card" [data]="content"></markdown>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-outline-primary btn-lg float-right">Отправить</button>
+      </div>
+    </div>
+    </div>
+    <div class="col-md-4">
+    <div class="card card-outline-secondary d-inline-flex">
+      <div class="card-header">
+        <h3 class="mb-0">Твои конспекты</h3>
+      </div>
+      <div class="card-body">
+      </div>
+    </div>
+    </div>
+  </div>
+

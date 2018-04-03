@@ -4,31 +4,31 @@
   <div class="card-header" role="tab">
     <div class="mb-6">
       <div class="row">
-        <div class="col-sm">
+        <div class="col-sm d-flex justify-content-start">
           <h6>@{{workbook.username}}</h6>
         </div>
-        <div class="col-sm">
-          <h6>Name : {{workbook.name}}</h6>
+        <div class="col-sm d-flex justify-content-center">
+          <h6>{{workbook.name}}</h6>
         </div>
-        <div class="col-sm">
+        <div class="col-sm d-flex justify-content-end">
           <h6>№ : {{workbook.numberSpecialty}}</h6>
         </div>
       </div>
       <accordion-group heading="{{workbook.title}}">
         <!--<span accordion-heading></span>#group>-->
           <div class="card-block">
-            <h3>{{workbook.content}}</h3>
+            <markdown class="variable-binding" [data]="workbook.content"></markdown>
           </div>
       </accordion-group>
       <div class="row">
         <div class="col-sm">
-          <h6>Tags : {{workbook.tags}}</h6>
+          <h6># {{workbook.tags}}</h6>
         </div>
-        <div class="col-sm">
-          <h6>Rating : {{workbook.rating}}</h6>
+        <div class="col-sm d-flex justify-content-center">
+          <app-rating [workbook]="workbook" *ngIf="auth.isAuthenticated()"></app-rating>
         </div>
-        <div class="col-sm">
-          <h6>Data : {{workbook.date}}</h6>
+        <div class="col-sm d-flex justify-content-end">
+          <h6 class="text-muted">{{workbook.date}}</h6>
         </div>
     </div>
 

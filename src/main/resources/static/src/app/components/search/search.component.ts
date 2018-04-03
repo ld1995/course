@@ -9,10 +9,6 @@ import {ResultComponent} from './result/result.component';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-
-  ngOnInit(): void {
-  }
-
   @Input() public query: string;
   constructor(private searchService: SearchService, private route: Router, private result: ResultComponent) {
   }
@@ -25,8 +21,12 @@ export class SearchComponent implements OnInit {
 
   public redirect(data) {
     this.searchService.data = data;
-     if (this.route.navigateByUrl('result')) {
+    console.log(data);
+    this.route.navigateByUrl('result');
        this.result.ngOnInit();
-     }
+       this.ngOnInit();
+  }
+
+  ngOnInit(): void {
   }
 }

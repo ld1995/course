@@ -7,7 +7,7 @@ import {User} from "../../models/user.model";
 @Injectable()
 export class UserService {
 
-  private url = "user";
+  private url = 'user';
 
   constructor(private http: HttpClient) { }
 
@@ -18,9 +18,6 @@ export class UserService {
 
   public createUser() {
     this.http.get<User[]>(`${ environment.webServiceEndpoint}/private/${this.url}/add`)
-      .subscribe(data => console.log(data))
+      .subscribe(data => console.log(data));
   }
-
-
-
 }
