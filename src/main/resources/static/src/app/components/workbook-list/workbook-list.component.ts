@@ -1,8 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {WorkbookService} from "../../services/workbook/workbook.service";
-import {Workbook} from "../../models/workbook.model";
-import {Tag} from "../../models/tag.model";
-import {AccordionConfig} from "ngx-bootstrap";
+import {Workbook} from '../../models/workbook.model';
 
 @Component({
   selector: 'app-workbook-list',
@@ -21,7 +18,3 @@ export class WorkbookListComponent implements OnInit {
   }
 
 }
-
-// export function getAccordionConfig(): AccordionConfig {
-//   return Object.assign(new AccordionConfig(), { closeOthers: true });
-// }

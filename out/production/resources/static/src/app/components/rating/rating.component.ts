@@ -20,8 +20,7 @@ export class RatingComponent implements OnInit {
     this.mark = this.workbook.rating;
   }
   public onClickStar() {
-    const {sub} = this.auth.userProfile;
-    this.ratingModel = new RatingModel(sub, this.workbook.id, this.mark);
-    this.ratingService.changeRating(this.ratingModel).subscribe(data => { this.mark = data; this.ngOnInit(); } );
+    this.ratingModel = new RatingModel(this.auth.userProfile.sub, this.workbook.id, this.mark);
+    this.ratingService.changeRating(this.ratingModel).subscribe(data => this.mark = data);
   }
 }

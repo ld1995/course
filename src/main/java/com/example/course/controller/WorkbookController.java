@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController()
@@ -37,6 +38,12 @@ public class WorkbookController {
     @PutMapping("/api/private/workbook")
     public void deleteWorkbook(@RequestBody @Valid WorkbookDto workbookDTO) {
         workbookService.updateWorkbook(workbookDTO);
+    }
+
+    @PostMapping("/api/private/workbook/user")
+    public List<WorkbookDto> getWorkbookListBy(@RequestBody @NotNull String username) {
+        System.out.println(username);
+        return workbookService.getWorkbookByUsername(username);
     }
 }
 //@ResponseBody ResponseEntity<String>

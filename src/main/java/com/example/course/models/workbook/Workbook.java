@@ -1,28 +1,24 @@
 package com.example.course.models.workbook;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-
-import com.example.course.models.*;
+import com.example.course.models.HasAuthor;
 import com.example.course.models.comment.Comment;
 import com.example.course.models.question.Question;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
 import org.apache.lucene.analysis.snowball.SnowballPorterFilterFactory;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.analysis.standard.StandardTokenizerFactory;
-import org.apache.lucene.analysis.util.CharArraySet;
 import org.hibernate.search.annotations.*;
 import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Parameter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "course_workbook")
@@ -30,7 +26,6 @@ import javax.persistence.*;
 @Indexed
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(exclude="rating", callSuper = false)
 @AnalyzerDef(name = "customarily",
         tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
         filters = {

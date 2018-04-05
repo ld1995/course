@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Url} from 'url';
 import {AuthService} from '../../services/auth0/auth-service';
+import {Url} from 'url';
 
 @Component({
   selector: 'app-profile',
@@ -9,37 +9,24 @@ import {AuthService} from '../../services/auth0/auth-service';
 })
 
 export class ProfileComponent implements OnInit {
-  private _nickname: string;
-  private _picture: Url;
+  public nickname: string;
+  public picture: Url;
 
   constructor(public auth: AuthService) { }
 
   ngOnInit() {
     if (this.auth.userProfile) {
-      // this.profile = this.auth.userProfile;
+      this.initProfile(this.auth.userProfile);
     } else {
       this.auth.getProfile((err, profile) => {
-        const {nickname, picture} = profile;
-        this._nickname = nickname;
-        this._picture = picture;
+        this.initProfile(profile);
       });
     }
   }
-
-  get nickname(): string {
-    return this._nickname;
-  }
-
-  set nickname(value: string) {
-    this._nickname = value;
-  }
-
-  get picture(): Url {
-    return this._picture;
-  }
-
-  set picture(value: Url) {
-    this._picture = value;
+  private initProfile(profile) {
+    const {nickname, picture} = profile;
+    this.nickname = nickname;
+    this.picture = picture;
   }
 }
 

@@ -26,4 +26,8 @@ export class WorkbookService {
   public createWorkbook(workbook: Workbook): Observable<Workbook> {
     return this.http.post<Workbook>(`${environment.webServiceEndpoint}/private/workbook`, workbook);
   }
+
+  public getWorkbookListByUsername(username: String): Observable<Workbook[]> {
+    return this.http.post<Workbook[]>(`${environment.webServiceEndpoint}/private/workbook/user`, username);
+  }
 }

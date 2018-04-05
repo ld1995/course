@@ -1,6 +1,6 @@
 import {Component, Injectable, OnInit} from '@angular/core';
-import {Workbook} from "../../../models/workbook.model";
-import {SearchService} from "../../../services/search/search.service";
+import {Workbook} from '../../../models/workbook.model';
+import {SearchService} from '../../../services/search/search.service';
 
 @Component({
   selector: 'app-result',

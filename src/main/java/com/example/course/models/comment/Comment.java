@@ -18,6 +18,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Indexed
+@EqualsAndHashCode(exclude="workbook", callSuper = false)
 public class Comment extends HasAuthor {
 
     @ManyToOne

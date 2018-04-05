@@ -9,6 +9,8 @@ import com.example.course.repository.WorkbookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -28,8 +30,9 @@ public class WorkbookService {
 
     public List<WorkbookDto> getWorkbookList() {
         return workbookRepository.findAll().stream()
-                .map(workbook -> toDtoConverter.convert(workbook))
-                .collect(Collectors.toList());
+                .map(workbook -> toDtoConverter.convert(workbook)).sorted(
+                        Comparator.comparing(WorkbookDto::getRating)
+                                .thenComparing(WorkbookDto::getDate).reversed()).collect(Collectors.toList());
     }
 
     public WorkbookDto getWorkbook(Long id) {
@@ -57,4 +60,14 @@ public class WorkbookService {
         }
     }
 
+    public List<WorkbookDto> getWorkbookByUsername(String username) {
+        if(workbookRepository.findAllByAuthor_Username(username).isPresent()) {
+            return workbookRepository.findAllByAuthor_Username(username).get().stream()
+                    .map(workbook -> toDtoConverter.convert(workbook)).sorted(
+                            Comparator.comparing(WorkbookDto::getRating).reversed()).collect(Collectors.toList());
+        } else {
+            return new ArrayList<>();
+        }
+
+    }
 }

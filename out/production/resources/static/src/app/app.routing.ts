@@ -18,7 +18,7 @@ import {AuthGuardService} from './services/auth0/AuthGuardService';
     component: SettingsComponent,
   }, {
     path: 'user',
-    component: UserComponent //, canActivate: [AuthGuardService]
+    component: UserComponent,// canActivate: [AuthGuardService]
   }
 ];
 

@@ -20,7 +20,7 @@ public class UserService {
         }
     }
 
-    public boolean isExist(String username) {
+    private boolean isExist(String username) {
         return userRepository.findByUsername(username).isPresent();
     }
 

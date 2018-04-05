@@ -5,7 +5,6 @@ import lombok.Data;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.*;
 
 @Data
@@ -26,7 +25,7 @@ public class WorkbookDto extends BasePersistenceDto {
     @NotNull
     private String content;
 
-    private Date date;
+    private Date date = new Date();
 
     @Max(5)
     @Min(1)
