@@ -2,27 +2,22 @@ package com.example.course.dto;
 
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 @Data
 public class CommentDto extends BasePersistenceDto {
 
-//    private String workbook;
-//
-//    @Column(name = "date", columnDefinition="DATETIME")
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
-//    @Temporal(TemporalType.DATE)
-//    private Date date = new Date();
-//
-//    @Field
-//    @Lob
-//    @Column(name = "content")
-//    private String content;
-//
-//    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private Set<LikeComment> like = new HashSet<>();
-//
-//    @OneToMany(mappedBy = "parent")
-//    private Set<Comment> comments = new HashSet<>();
-//
-//    @ManyToOne
-//    private Comment parent;
+//   private String workbook;
+
+    private Date date = new Date();
+
+    private String content;
+
+    private Integer like;
+
+    private List<Integer> comments = new ArrayList<>();
+
+    private Integer parent;
 }

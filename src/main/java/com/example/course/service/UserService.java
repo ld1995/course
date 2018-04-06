@@ -15,13 +15,9 @@ public class UserService {
     private UserRepository userRepository;
 
     public void createUser(String username, Role role, boolean blocked) {
-        if(!isExist(username)) {
+        if(!userRepository.findByUsername(username).isPresent()) {
             userRepository.save(new User(username, role, blocked));
         }
-    }
-
-    private boolean isExist(String username) {
-        return userRepository.findByUsername(username).isPresent();
     }
 
     public String getUsername() {

@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output} from '@angular/core';
 import {SearchService} from '../../services/search/search.service';
 import {Router} from '@angular/router';
 import {ResultComponent} from './result/result.component';
+import {Workbook} from '../../models/workbook.model';
 
 @Component({
   selector: 'app-search',
@@ -10,6 +11,7 @@ import {ResultComponent} from './result/result.component';
 })
 export class SearchComponent implements OnInit {
   @Input() public query: string;
+  @Output() public workbookList: Workbook[];
   constructor(private searchService: SearchService, private route: Router, private result: ResultComponent) {
   }
 

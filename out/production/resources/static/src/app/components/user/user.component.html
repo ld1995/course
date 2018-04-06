@@ -1,6 +1,5 @@
 <div class="row">
 <div class="col-sm-6 p-3">
-  <!--<form>-->
   <div class="card card-outline-secondary">
     <div class="card-header">
       <h3 class="mb-0">Добавление нового конспекта</h3>
@@ -12,7 +11,7 @@
           <input class="form-control" [(ngModel)]="name" id="name" type="text" placeholder="" required>
         </div>
         <div class="form-group col">
-          <label for="numberSpecialty">Номер специальности</label>
+          <label for="numberSpecialty">№специальности</label>
           <input class="form-control" [(ngModel)]="numberSpecialty"
                  id="numberSpecialty" type="number" min="1" max="1000000000" required>
         </div>
@@ -23,15 +22,21 @@
       </div>
       <div class="form-group">
         <label for="content">Конспект</label>
-        <textarea class="variable-textarea form-control" id="content" [(ngModel)]="content" rows="5" required></textarea>
+        <div *ngIf="currentUpload">
+          <progress class="progress-bar form-control" min=1 max=100 value="{{ progress }}"></progress>
+        </div>
+        <textarea class="variable-textarea form-control dropzone" id="content" [(ngModel)]="content" rows="5"
+          (filesDropped)="handleDrop($event)" (filesHovered)="dropzoneState($event)"
+                  [ngClass]="{'active': dropzoneActive}" appFileDrop required></textarea>
         <markdown class="variable-binding card form-control" [data]="content"></markdown>
       </div>
       <button type="submit" class="btn btn-outline-primary btn-lg float-right" (click)="createWorkbook()">Сохранить</button>
     </div>
   </div>
-  <!--</form>-->
 </div>
   <div class="col-sm-6">
+    <!--<app-user-table [dataSource]="workbookList"></app-user-table>-->
     <app-workbook-list [workbookList]="workbookList"></app-workbook-list>
   </div>
 </div>
+

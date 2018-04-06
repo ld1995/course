@@ -3,6 +3,7 @@ package com.example.course.controller;
 import com.example.course.dto.WorkbookDto;
 import com.example.course.service.WorkbookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -16,6 +17,7 @@ public class WorkbookController {
     private WorkbookService workbookService;
 
     @GetMapping("/api/public/workbook")
+    @ResponseBody
     public List<WorkbookDto> getWorkbookList() {
         return workbookService.getWorkbookList();
     }
@@ -31,6 +33,7 @@ public class WorkbookController {
     }
 
     @GetMapping("/api/private/workbook/{id}")
+    @ResponseBody
     public WorkbookDto getWorkbook(@PathVariable Long id) {
         return workbookService.getWorkbook(id);
     }
@@ -41,8 +44,8 @@ public class WorkbookController {
     }
 
     @PostMapping("/api/private/workbook/user")
+    @ResponseBody
     public List<WorkbookDto> getWorkbookListBy(@RequestBody @NotNull String username) {
-        System.out.println(username);
         return workbookService.getWorkbookByUsername(username);
     }
 }

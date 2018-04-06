@@ -7,4 +7,7 @@ public class UserDto extends BasePersistenceDto {
 
     private String username;
 
+    private Boolean blocked;
+
+    private String role;
 }

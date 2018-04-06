@@ -1,5 +1,5 @@
 <accordion [closeOthers]="true">
-  <div class="row" *ngFor="let workbook of workbookList">
+  <div class="row" *ngFor="let workbook of workbookList | orderBy: sort">
     <div class="col-md p-3">
         <app-workbook [workbook]="workbook"></app-workbook>
     </div>

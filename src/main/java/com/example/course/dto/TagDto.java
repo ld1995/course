@@ -5,5 +5,7 @@ import lombok.Data;
 @Data
 public class TagDto extends BasePersistenceDto {
 
+    private String
+
     private String name;
 }

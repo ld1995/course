@@ -1,4 +1,5 @@
-<div><h4 class="text-muted p-3">{{workbookList.length === 0 ? 'Тебе не повезло, попробуй ещё разочек :-)' : 'Ура!!!'}}</h4>
+<div class="col-md-8 offset-md-2">
+  <h4 class="text-muted p-3">{{workbookList.length === 0 ? 'Тебе не повезло, попробуй ещё разочек :-)' : 'Ура!!!'}}</h4>
   <app-search></app-search>
+  <app-workbook-list [workbookList]="workbookList"></app-workbook-list>
 </div>
-<app-workbook-list [workbookList]="workbookList"></app-workbook-list>

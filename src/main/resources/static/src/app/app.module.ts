@@ -30,6 +30,13 @@ import { RatingComponent } from './components/rating/rating.component';
 import {BarRatingModule} from 'ngx-bar-rating';
 import {RatingService} from './services/rating/rating.service';
 import {AuthGuardService} from './services/auth0/AuthGuardService';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { FileDropDirective } from './directive/file-drop/file-drop.directive';
+import {AngularFireModule} from 'angularfire2';
+import {environment} from '../environments/environment';
+import {AngularFireDatabaseModule} from 'angularfire2/database';
+import {Ng2ImgMaxModule} from 'ng2-img-max';
+import {OrderModule} from 'ngx-order-pipe';
 
 @NgModule({
   declarations: [
@@ -45,7 +52,8 @@ import {AuthGuardService} from './services/auth0/AuthGuardService';
     UserComponent,
     RootComponent,
     SettingsComponent,
-    RatingComponent
+    RatingComponent,
+    FileDropDirective
   ],
   imports: [
     BrowserModule,
@@ -65,7 +73,12 @@ import {AuthGuardService} from './services/auth0/AuthGuardService';
         smartypants: false,
       },
     }),
-    BarRatingModule
+    BarRatingModule,
+    BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.configFirebase),
+    AngularFireDatabaseModule,
+    Ng2ImgMaxModule,
+    OrderModule
   ],
   providers: [appRoutingProviders,
     {

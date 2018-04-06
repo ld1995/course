@@ -26,7 +26,8 @@
       "scripts": ["../node_modules/prismjs/prism.js",
         "../node_modules/prismjs/components/prism-csharp.min.js",
         "../node_modules/prismjs/components/prism-css.min.js",
-        "../node_modules/marked/lib/marked.js"
+        "../node_modules/marked/lib/marked.js",
+        "../node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

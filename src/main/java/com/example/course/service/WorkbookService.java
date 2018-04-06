@@ -6,7 +6,9 @@ import com.example.course.dto.WorkbookDto;
 import com.example.course.models.workbook.Rating;
 import com.example.course.models.workbook.Workbook;
 import com.example.course.repository.WorkbookRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -48,15 +50,15 @@ public class WorkbookService {
     }
 
     public void deleteWorkbook(Long id) {
-        if(workbookRepository.findById(id).isPresent()) {//todo test
-            workbookRepository.delete(workbookRepository.findById(id).get());
-        }
+        workbookRepository.delete(workbookRepository.findById(id).get());
     }
 
     public void updateWorkbook(WorkbookDto workbookDto) {
-        Workbook workbook = fromDtoConverter.convert(workbookDto);
-        if (workbookRepository.findById(workbook.getId()).isPresent()) {
-            //Todo update
+        Workbook modified  = fromDtoConverter.convert(workbookDto);
+        if (workbookRepository.findById(modified .getId()).isPresent()) {
+            Workbook original = workbookRepository.findById(modified.getId()).get();
+            BeanUtils.copyProperties(original,modified,"id");
+            workbookRepository.save(original);
         }
     }
 
