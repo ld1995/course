@@ -1,3 +1,3 @@
-export class Question {
+export class QuestionModel {
 
 }

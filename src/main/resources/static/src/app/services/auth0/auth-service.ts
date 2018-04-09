@@ -15,6 +15,7 @@ export class AuthService {
 
   public userProfile: any;
   refreshSub: any;
+  sub: string;
 
   constructor(public router: Router, private http: HttpClient, private user: UserService) {
   }
@@ -43,9 +44,8 @@ export class AuthService {
     localStorage.setItem('expires_at', expiresAt);
     const scopes = authResult.scope || environment.requestedScopes || '';
     localStorage.setItem('scopes', JSON.stringify(scopes));
-    this.user.createUser();
+    this.user.addUser();
     this.scheduleRenewal();
-    // this.user.getAllUsers();
   }
 
   public getProfile(cb): void {
@@ -58,6 +58,9 @@ export class AuthService {
     this.auth0.client.userInfo(accessToken, (err, profile) => {
       if (profile) {
         self.userProfile = profile;
+        if (profile.sub !== undefined) {
+          self.sub = profile.sub;
+        }
       }
       cb(err, profile);
     });

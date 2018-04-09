@@ -8,7 +8,7 @@ import {
 import { AuthService } from '../auth0/auth-service';
 import { Observable } from 'rxjs/Observable';
 @Injectable()
-export class TokenInterceptor {//implements HttpInterceptor {
+export class TokenInterceptor {
 
   constructor(public auth: AuthService) {}
 

@@ -1,5 +1,5 @@
 import {Component, Injectable, OnInit} from '@angular/core';
-import {Workbook} from '../../../models/workbook.model';
+import {WorkbookModel} from '../../../models/workbook.model';
 import {SearchService} from '../../../services/search/search.service';
 
 @Component({
@@ -9,7 +9,7 @@ import {SearchService} from '../../../services/search/search.service';
 })
 @Injectable()
 export class ResultComponent implements OnInit {
-  public workbookList: Workbook[] = [];
+  public workbookList: WorkbookModel[] = [];
 
   constructor( private searchService: SearchService) {
   }

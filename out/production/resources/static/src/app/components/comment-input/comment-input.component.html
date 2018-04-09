@@ -1,0 +1,5 @@
+<input class="form-control mr-sm-2"
+       type="text" id="comment"
+       placeholder="Напишите комментарий.."
+       (keyup.enter)="addComment($event.target.value);
+        $event.target.value ='';" maxlength="120" [(ngModel)]="content" />

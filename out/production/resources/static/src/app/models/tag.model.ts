@@ -1,4 +1,4 @@
-export class Tag {
+export class TagModel {
   name: string;
 
   constructor(name: string) {

@@ -1,8 +1,11 @@
 package com.example.course.converter.workbook;
 
 import com.example.course.converter.BaseConverter;
+import com.example.course.converter.comment.CommentToDtoConverter;
+import com.example.course.dto.CommentDto;
 import com.example.course.dto.WorkbookDto;
 import com.example.course.models.PersistentObject;
+import com.example.course.models.comment.Comment;
 import com.example.course.models.workbook.Tag;
 import com.example.course.models.workbook.Workbook;
 import com.example.course.service.RatingService;
@@ -11,17 +14,20 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Component
 public class WorkbookToDtoConverter extends BaseConverter <WorkbookDto,Workbook>{
 
     @Autowired
-    private WorkbookService workbookService;
+    private RatingService ratingService;
 
     @Autowired
-    private RatingService ratingService;
+    private CommentToDtoConverter commentConverter;
 
     @Override
     protected WorkbookDto convertOrNull(Workbook source) {
@@ -36,9 +42,12 @@ public class WorkbookToDtoConverter extends BaseConverter <WorkbookDto,Workbook>
                 .map(PersistentObject::getId).collect(Collectors.toList());
         target.setQuestionsId(questions);
 
-        List<Long> comments = source.getComments().stream()
-                .map(PersistentObject::getId).collect(Collectors.toList());
-        target.setCommentsId(comments);
+        List<CommentDto> comments = source.getComments().stream()
+                .filter(comment -> comment.getParent() == null)
+                .map(commentConverter::convert)
+                .sorted(Comparator.comparing(CommentDto::getDate).thenComparing(CommentDto::getId))
+                .collect(Collectors.toList());
+        target.setComments(comments);
 
         List<String> tags = source.getTags().stream()
                 .map(Tag::getName)
@@ -48,5 +57,3 @@ public class WorkbookToDtoConverter extends BaseConverter <WorkbookDto,Workbook>
         return target;
     }
 }
-
-//    private Set<Tag> tags = new HashSet<>();

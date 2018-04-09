@@ -1,5 +1,7 @@
 package com.example.course.service;
 
+import com.example.course.converter.tag.TagFromDtoConverter;
+import com.example.course.converter.tag.TagToDtoConverter;
 import com.example.course.dto.TagDto;
 import com.example.course.dto.WorkbookDto;
 import com.example.course.repository.TagRepository;
@@ -14,10 +16,20 @@ import java.util.stream.Collectors;
 public class TagService {
 
     @Autowired
+    private TagToDtoConverter toDtoConverter;
+
+    @Autowired
+    private TagFromDtoConverter fromDtoConverter;
+
+    @Autowired
     private TagRepository tagRepository;
 
     public List<TagDto> getTagList() {
         return tagRepository.findAll().stream()
-                .map(workbook -> toDtoConverter.convert(workbook)).collect(Collectors.toList());;
+                .map(tag -> toDtoConverter.convert(tag)).collect(Collectors.toList());
+    }
+
+    public void addTag(TagDto tagDto) {
+        tagRepository.save(fromDtoConverter.convert(tagDto));
     }
 }

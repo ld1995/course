@@ -30,11 +30,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET,"/api/public/**").permitAll()
                 .antMatchers(HttpMethod.POST,"/api/public/**").permitAll()
-                .antMatchers(HttpMethod.DELETE,"/api/public/**").permitAll()
-                .antMatchers(HttpMethod.POST,"/api/public/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/private/**").authenticated()
                 .antMatchers(HttpMethod.POST, "/api/private/**").authenticated()
-                .antMatchers(HttpMethod.DELETE, "/api/private/**").authenticated()
+                .antMatchers(HttpMethod.DELETE, "/api/private/workbook/**").authenticated()
                 .antMatchers(HttpMethod.PUT, "/api/private/**").authenticated()
                 .antMatchers(HttpMethod.POST, "/api/private/user/add").hasAuthority("write:user");
     }

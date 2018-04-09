@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../services/auth0/auth-service';
 import {WorkbookService} from '../../services/workbook/workbook.service';
-import {Workbook} from '../../models/workbook.model';
-import {ProfileComponent} from '../profile/profile.component';
+import {WorkbookModel} from '../../models/workbook.model';
 import {FileModel} from '../../models/file.model';
 import * as _ from 'lodash';
 import {AngularFireDatabase} from 'angularfire2/database';
 import * as firebase from 'firebase';
 import {Ng2ImgMaxService} from 'ng2-img-max';
-import {WorkbookComponent} from '../workbook/workbook.component';
-import {WorkbookListComponent} from '../workbook-list/workbook-list.component';
 
 @Component({
   selector: 'app-user',
@@ -17,50 +14,74 @@ import {WorkbookListComponent} from '../workbook-list/workbook-list.component';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  public content: string;
-  public title: string;
-  public name: string;
-  public numberSpecialty;
-  public workbook: Workbook;
-  public workbookList: Workbook[] = [];
-  private profile: ProfileComponent;
+  public workbook: WorkbookModel;
+  public workbookList: WorkbookModel[] = [];
   public currentUpload: FileModel;
   public dropzoneActive = false;
   public progress: number;
   public sortedBy: string;
-  public workbookListComponent: WorkbookListComponent;
+  public name: string;
+  public numberSpecialty;
+  public title: string;
+  public content: string;
+  public id: number = undefined;
 
   constructor(private auth: AuthService, private workbookService: WorkbookService,
               private fireData: AngularFireDatabase, private ng2ImgMax: Ng2ImgMaxService) {
   }
 
+  //todo validata запретить нажатие, если форма пуста
   ngOnInit() {
     this.cleanForm();
     this.getWorkbookListByUsername();
   }
 
-  public createWorkbook() {
-    //todo validata
-    this.workbook = new Workbook(this.auth.userProfile.sub,
-      this.name, this.title, `${this.numberSpecialty}`, this.content);
-    this.workbookService.createWorkbook(this.workbook).subscribe(data => console.log(data));
-    this.ngOnInit();
+  public clickHandler() {
+    console.log(this.auth.sub);
+    console.log(this.auth.userProfile.sub);
+    this.workbook = new WorkbookModel(this.id, this.auth.sub, this.name, this.title, this.numberSpecialty, this.content);
+    this.workbook.id === undefined ? this.addWorkbook() : this.updateWorkbook();
+  }
+
+  private addWorkbook() {
+    console.log(this.workbook);
+    this.workbookService.addWorkbook(this.workbook).subscribe(data => {console.log(data); this.ngOnInit(); });
+  }
+
+  private updateWorkbook() {
+    console.log(this.workbook);
+    this.workbookService.updateWorkbook(this.workbook).subscribe( data => {console.log(data); this.ngOnInit(); });
+  }
+
+  public getWorkbookListByUsername() {
+    this.workbookService.getWorkbookListByUsername(this.auth.sub).subscribe(data => this.workbookList = data);
+  }
+
+  public deleteWorkbook(id) {
+    this.workbookService.deleteWorkbook(id).subscribe(data => {console.log(data); this.ngOnInit(); });
   }
 
   public sort($event) {
      this.sortedBy = $event.target.getAttribute('data-sort');
   }
 
-  public getWorkbookListByUsername() {
-    console.log(this.auth.userProfile.sub);
-    this.workbookService.getWorkbookListByUsername(this.auth.userProfile.sub).subscribe(data => this.workbookList = data);
-  }
-
   private cleanForm() {
-    this.content = '';
-    this.title = '';
+    this.workbook = null;
+    this.progress = 0;
     this.name = '';
     this.numberSpecialty = '';
+    this.title = '';
+    this.content = '';
+  }
+
+  public transferDataSuccess($event) {
+    this.workbook = $event.dragData;
+    const {id, name, numberSpecialty, title, content} = this.workbook;
+    this.id = id;
+    this.name = name;
+    this.numberSpecialty = numberSpecialty;
+    this.title = title;
+    this.content = content;
   }
 
   dropzoneState($event: boolean) {
@@ -68,9 +89,10 @@ export class UserComponent implements OnInit {
   }
 
   handleDrop(fileList: FileList) {
+    // debugger;
     const filesIndex = _.range(fileList.length);
     _.each(filesIndex, (idx) => {
-      this.ng2ImgMax.resizeImage(fileList[idx], 470, 10000).subscribe(
+      this.ng2ImgMax.resizeImage(fileList[idx], 450, 10000).subscribe(
         result => {
           this.currentUpload = new FileModel(result);
           this.pushUpload(this.currentUpload);
@@ -81,6 +103,7 @@ export class UserComponent implements OnInit {
   pushUpload(upload: FileModel) {
     const storageRef = firebase.storage().ref();
     const uploadTask = storageRef.child(`uploads/${upload.file.name}`).put(upload.file);
+
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       (snapshot) =>  {
         this.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -89,7 +112,9 @@ export class UserComponent implements OnInit {
         console.log(error);
       },
       () => {
-        this.content = (this.content.concat(`![alt text](${uploadTask.snapshot.downloadURL} "${upload.file.name}")`));
+        upload.url = uploadTask.snapshot.downloadURL;
+        upload.name = upload.file.name;
+        this.content += `\n ![alt text](${upload.url} "${upload.name}")`;
         this.saveFileData(upload);
       }
     );

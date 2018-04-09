@@ -1,5 +1,8 @@
+import {TagModel} from './tag.model';
+import {QuestionModel} from './question.model';
+import {CommentModel} from './comment.model';
 
-export class Workbook {
+export class WorkbookModel {
   id?: number;
   username: string;
   // private picture: URL;
@@ -9,11 +12,12 @@ export class Workbook {
   content: string;
   date?: Date;
   rating: number;
-  questions: number[];
-  comments: number[];
-  tags: string[];
+  questions: QuestionModel[];
+  comments: CommentModel[];
+  tags: TagModel[];
 
-  constructor(username: string, name: string, title: string, numberSpecialty: string, content: string) {
+  constructor(id: number, username: any, name: string, title: string, numberSpecialty: string, content: string) {
+    this.id = id;
     this.username = username;
     this.name = name;
     this.title = title;

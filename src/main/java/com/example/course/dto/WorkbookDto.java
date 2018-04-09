@@ -27,13 +27,11 @@ public class WorkbookDto extends BasePersistenceDto {
 
     private Date date = new Date();
 
-    @Max(5)
-    @Min(1)
     private Integer rating;
 
     private List<Long> questionsId = new ArrayList<>();
 
-    private List<Long> commentsId = new ArrayList<>();
+    private List<CommentDto> comments = new ArrayList<>();
 
     private List<String> tags = new ArrayList<>();
 }

@@ -18,15 +18,15 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Indexed
-@EqualsAndHashCode(exclude="workbook", callSuper = false)
+@EqualsAndHashCode(callSuper = false, exclude = {"workbook","comments"})
 public class Comment extends HasAuthor {
 
     @ManyToOne
     private Workbook workbook;
 
     @Column(name = "date", columnDefinition="DATETIME")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy/MM/dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date date = new Date();
 
     @Field
@@ -35,12 +35,11 @@ public class Comment extends HasAuthor {
     private String content;
 
     @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<LikeComment> like = new HashSet<>();
+    private Set<Like> like = new HashSet<>();
 
-    @OneToMany(mappedBy = "parent")
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Comment> comments = new HashSet<>();
 
     @ManyToOne
     private Comment parent;
-
 }

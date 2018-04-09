@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {environment} from '../../../environments/environment';
-import {Workbook} from '../../models/workbook.model';
+import {WorkbookModel} from '../../models/workbook.model';
 import {HttpClient} from '@angular/common/http';
 import {RatingModel} from '../../models/rating.model';
 

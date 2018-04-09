@@ -4,10 +4,8 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {AuthService} from './services/auth0/auth-service';
-import { HomeComponent } from './home/home.component';
 import {appRoutingProviders, routing} from './app.routing';
 import { AUTH_PROVIDERS } from 'angular2-jwt';
-import {HomeService} from './home/home.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {TokenInterceptor} from './services/interceptor/token.interceptor';
 import { WorkbookListComponent } from './components/workbook-list/workbook-list.component';
@@ -17,7 +15,6 @@ import { SearchComponent } from './components/search/search.component';
 import {FormsModule} from '@angular/forms';
 import {SearchService} from './services/search/search.service';
 import { ResultComponent } from './components/search/result/result.component';
-import { CommentListComponent } from './components/comment-list/comment-list.component';
 import { CommentComponent } from './components/comment/comment.component';
 import {UserService} from './services/user/user.service';
 import {WorkbookService} from './services/workbook/workbook.service';
@@ -37,23 +34,25 @@ import {environment} from '../environments/environment';
 import {AngularFireDatabaseModule} from 'angularfire2/database';
 import {Ng2ImgMaxModule} from 'ng2-img-max';
 import {OrderModule} from 'ngx-order-pipe';
+import {DndModule} from 'ng2-dnd';
+import {CommentService} from './services/comment/comment.service';
+import {CommentInputComponent} from './components/comment-input/comment-input.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     WorkbookListComponent,
     WorkbookComponent,
     ProfileComponent,
     SearchComponent,
     ResultComponent,
-    CommentListComponent,
     CommentComponent,
     UserComponent,
     RootComponent,
     SettingsComponent,
     RatingComponent,
-    FileDropDirective
+    FileDropDirective,
+    CommentInputComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +77,8 @@ import {OrderModule} from 'ngx-order-pipe';
     AngularFireModule.initializeApp(environment.configFirebase),
     AngularFireDatabaseModule,
     Ng2ImgMaxModule,
-    OrderModule
+    OrderModule,
+    DndModule.forRoot()
   ],
   providers: [appRoutingProviders,
     {
@@ -88,12 +88,13 @@ import {OrderModule} from 'ngx-order-pipe';
     },
     AUTH_PROVIDERS,
     AuthService,
-    HomeService,
     SearchService,
     UserService,
     WorkbookService,
     ResultComponent,
-    RatingService
+    RatingService,
+    AuthGuardService,
+    CommentService
   ],
   bootstrap: [AppComponent]
 })

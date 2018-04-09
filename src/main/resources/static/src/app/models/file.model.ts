@@ -4,6 +4,7 @@ export class FileModel {
   name: string;
   url: string;
   createdAt: Date = new Date();
+  progress: number;
   constructor(file: File) {
     this.file = file;
   }

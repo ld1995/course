@@ -21,7 +21,8 @@
       "styles": [
         "styles.css",
         "../node_modules/prismjs/themes/prism-okaidia.css",
-        "../node_modules/ngx-bar-rating/themes/br-default-theme.css"
+        "../node_modules/ngx-bar-rating/themes/br-default-theme.css",
+        "../node_modules/ng2-dnd/bundles/style.css"
       ],
       "scripts": ["../node_modules/prismjs/prism.js",
         "../node_modules/prismjs/components/prism-csharp.min.js",

@@ -33,9 +33,8 @@ public class SearchService {
     public List<WorkbookDto> search(String query) throws IOException {
         if(isValid(query.trim())) {
            return conversionToDTO( (List<Workbook>) searchWorkbook.searchWorkbook(query));
-        } else {
-            return new ArrayList<>();
         }
+        return new ArrayList<>();
     }
 
 }

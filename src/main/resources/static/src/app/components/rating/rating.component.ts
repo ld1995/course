@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {RatingService} from '../../services/rating/rating.service';
-import {Workbook} from '../../models/workbook.model';
+import {WorkbookModel} from '../../models/workbook.model';
 import {RatingModel} from '../../models/rating.model';
 import {AuthService} from '../../services/auth0/auth-service';
 
@@ -11,16 +11,20 @@ import {AuthService} from '../../services/auth0/auth-service';
 })
 export class RatingComponent implements OnInit {
   public mark: number;
-  @Input() private workbook: Workbook;
+  @Input() private workbook: WorkbookModel;
   private ratingModel: RatingModel;
 
   constructor(private ratingService: RatingService, private auth: AuthService) { }
 
-  ngOnInit() {
-    this.mark = this.workbook.rating;
-  }
   public onClickStar() {
     this.ratingModel = new RatingModel(this.auth.userProfile.sub, this.workbook.id, this.mark);
-    this.ratingService.changeRating(this.ratingModel).subscribe(data => this.mark = data);
+    this.ratingService.changeRating(this.ratingModel).subscribe(data => {
+      this.workbook.rating = data;
+      this.ngOnInit();
+    } );
+  }
+
+  ngOnInit(): void {
+    this.mark = this.workbook.rating;
   }
 }

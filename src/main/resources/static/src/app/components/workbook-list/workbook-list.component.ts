@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {Workbook} from '../../models/workbook.model';
+import {WorkbookModel} from '../../models/workbook.model';
 
 @Component({
   selector: 'app-workbook-list',
@@ -8,7 +8,7 @@ import {Workbook} from '../../models/workbook.model';
 })
 export class WorkbookListComponent implements OnInit, OnChanges {
 
-  @Input() public workbookList: Workbook[];
+  @Input() public workbookList: WorkbookModel[];
   @Input() public sort: string;
 
   constructor() {
@@ -19,7 +19,6 @@ export class WorkbookListComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['sort']) {
-      console.log(this.sort);
     }
   }
 

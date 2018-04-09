@@ -6,6 +6,7 @@ import com.example.course.models.question.Question;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
 import org.apache.lucene.analysis.snowball.SnowballPorterFilterFactory;
@@ -36,12 +37,6 @@ import java.util.Set;
                 })
         })
 public class Workbook extends HasAuthor {
-    public Workbook(String name, String title, String numberSpecialty, String content) {
-        this.name = name;
-        this.title = title;
-        this.numberSpecialty = numberSpecialty;
-        this.content = content;
-    }
 
     @Column(name = "name")
     @Analyzer(definition = "customarily")

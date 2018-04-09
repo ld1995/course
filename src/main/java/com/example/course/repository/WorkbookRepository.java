@@ -1,5 +1,6 @@
 package com.example.course.repository;
 
+import com.example.course.dto.CommentDto;
 import com.example.course.models.user.User;
 import com.example.course.models.workbook.Workbook;
 import org.springframework.data.jpa.repository.JpaRepository;

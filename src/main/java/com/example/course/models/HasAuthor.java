@@ -14,7 +14,6 @@ import javax.persistence.MappedSuperclass;
 @Setter
 public abstract class HasAuthor extends PersistentObject{
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     private User author;
 }

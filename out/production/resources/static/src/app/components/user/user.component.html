@@ -1,42 +1,57 @@
-<div class="row">
-<div class="col-sm-6 p-3">
-  <div class="card card-outline-secondary">
-    <div class="card-header">
-      <h3 class="mb-0">Добавление нового конспекта</h3>
-    </div>
-    <div class="card-body">
-      <div class="form-row">
-        <div class="form-group col">
-          <label for="name">Название</label>
-          <input class="form-control" [(ngModel)]="name" id="name" type="text" placeholder="" required>
-        </div>
-        <div class="form-group col">
-          <label for="numberSpecialty">№специальности</label>
-          <input class="form-control" [(ngModel)]="numberSpecialty"
-                 id="numberSpecialty" type="number" min="1" max="1000000000" required>
-        </div>
+<div class="row p-3">
+  <div class="col-sm-6">
+    <div class="card card-outline-secondary">
+      <div class="card-header">
+        <h3 class="mb-0">Добавление нового конспекта</h3>
       </div>
-      <div class="form-group">
-        <label for="title">Описание</label>
-        <input type="text" class="form-control" [(ngModel)]="title" id="title" required>
-      </div>
-      <div class="form-group">
-        <label for="content">Конспект</label>
-        <div *ngIf="currentUpload">
-          <progress class="progress-bar form-control" min=1 max=100 value="{{ progress }}"></progress>
+      <div class="card-body" dnd-droppable (onDropSuccess)="transferDataSuccess($event)">
+        <div class="form-row">
+          <div class="form-group col">
+            <label for="name">Название</label>
+            <input class="form-control" [(ngModel)]="name" (ngModelChange)="name"
+                   id="name" type="text" required>
+          </div>
+          <div class="form-group col">
+            <label for="numberSpecialty">Номер</label>
+            <input class="form-control" ngDefaultControl="numberSpecialty" [(ngModel)]="numberSpecialty"
+                   id="numberSpecialty" type="number" min="1" max="1000000000" required>
+          </div>
         </div>
-        <textarea class="variable-textarea form-control dropzone" id="content" [(ngModel)]="content" rows="5"
-          (filesDropped)="handleDrop($event)" (filesHovered)="dropzoneState($event)"
-                  [ngClass]="{'active': dropzoneActive}" appFileDrop required></textarea>
-        <markdown class="variable-binding card form-control" [data]="content"></markdown>
+        <div class="form-group">
+          <label for="title">Описание</label>
+          <input type="text" class="form-control" ngDefaultControl="title" [(ngModel)]="title" id="title" required>
+        </div>
+        <div class="form-group">
+          <label for="content">Конспект</label>
+          <div *ngIf="currentUpload">
+            <progress class="form-control" min=1 max=100 value="{{ progress }}"></progress>
+          </div>
+          <textarea class="variable-textarea form-control dropzone" appFileDrop id="content"
+                    [(ngModel)]="content" rows="5"
+                    (filesDropped)="handleDrop($event)" (filesHovered)="dropzoneState($event)"
+                    [ngClass]="{'active': dropzoneActive}" required>
+          </textarea>
+          <markdown class="variable-binding card form-control" [data]="content"></markdown>
+        </div>
+        <button type="submit" class="btn btn-outline-primary btn-lg float-right" (click)="clickHandler()">Сохранить</button>
+        <button type="submit" class="btn btn-outline-primary btn-lg float-right " (click)="cleanForm()">Отчистить</button>
       </div>
-      <button type="submit" class="btn btn-outline-primary btn-lg float-right" (click)="createWorkbook()">Сохранить</button>
     </div>
   </div>
-</div>
   <div class="col-sm-6">
-    <!--<app-user-table [dataSource]="workbookList"></app-user-table>-->
-    <app-workbook-list [workbookList]="workbookList"></app-workbook-list>
+    <div class="card">
+      <div class="card-body row" (click)="sort($event)">
+        <button class="btn btn-outline-primary col" data-sort='name'>Название</button>
+        <button class="btn btn-outline-primary col" data-sort='numberSpecialty'>Номер</button>
+        <button class="btn btn-outline-primary col" data-sort='title'>Описание</button>
+        <button class="btn btn-outline-primary col" data-sort='content'>Конспект</button>
+        <button class="btn btn-outline-primary col" data-sort='date'>Дата</button>
+        <button class="btn btn-outline-primary col" dnd-droppable disabled (onDropSuccess)="deleteWorkbook($event.dragData['id'])">
+          <i class="fa fa-trash"></i>
+        </button>
+      </div>
+    </div>
+    <app-workbook-list [workbookList]="workbookList" [sort]="sortedBy" modification="draggable"></app-workbook-list>
   </div>
 </div>
 

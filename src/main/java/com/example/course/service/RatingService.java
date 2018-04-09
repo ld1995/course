@@ -18,9 +18,6 @@ public class RatingService {
     private RatingFromDtoConverter fromDtoConverter;
 
     @Autowired
-    private RatingToDtoConverter toDtoConverter;
-
-    @Autowired
     private RatingRepository ratingRepository;
 
     public void changeRating(RatingDto ratingDTO) {
@@ -38,7 +35,7 @@ public class RatingService {
         return findRating(Sets.newHashSet(ratingRepository.findAll()));
     }
 
-    public int findRating(Set<Rating> rating) {
+    public Integer findRating(Set<Rating> rating) {
         return rating.size() != 0 ?
                 rating.stream().mapToInt(Rating::getMark).sum() / rating.size() : 0;
     }

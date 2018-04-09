@@ -1,5 +1,15 @@
-<accordion-group heading="{{comment}}">
-  <p>
-    {{comment}}
-  </p>
-</accordion-group>
+<div *ngFor="let comment of comments">
+  <accordion-group>
+    <div accordion-heading class="clearfix">
+      {{comment.username}}
+      <span class="badge badge-secondary float-right pull-right">{{comment.date | date:"hh:mm:ss"}}</span>
+    </div>
+    <div class="card-body">
+      <span class="float-center"><h5>{{comment.content}}</h5></span>
+    </div>
+    <span>Комментарии</span>
+    <app-comment *ngIf="comment.comments" (onUpdateRecursive)="onUpdateChild($event)"
+                 [workbookId]="workbookId" [comments]="comment.comments"></app-comment>
+    <app-comment-input (onUpdate)="onUpdate($event)" [commentId]="comment.id" [workbookId]="workbookId"></app-comment-input>
+    </accordion-group>
+</div>

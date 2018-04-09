@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController()
+@RestController
 public class UserController {
 
     @Autowired
@@ -28,9 +28,4 @@ public class UserController {
     public List<User> getUserList() {
         return userRepository.findAll();
     }
-
-
-
-
-
 }

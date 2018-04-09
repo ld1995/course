@@ -1,3 +1,3 @@
-export class Like {
-
+export class LikeModel {
+  count: number;
 }
